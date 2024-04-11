@@ -1,0 +1,10 @@
+{
+  "TextField": [
+    {
+      "displayType": "Detail",
+      "differentiator": "TreeFarm-ScientificName",
+      "place": "Content:1",
+      "contentType": "TreeFarm"
+    }
+  ]
+}

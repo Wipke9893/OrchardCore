@@ -1,0 +1,31 @@
+@model OrchardCore.Media.ViewModels.DisplayMediaFieldViewModel
+@using OrchardCore.ContentManagement.Metadata.Models
+@using OrchardCore.Mvc.Utilities
+@{
+    var paths = Model.Paths ?? Array.Empty<string>();
+    var mediaTexts = Model.Field?.MediaTexts ?? Array.Empty<string>();
+    var name = (Model.PartFieldDefinition.PartDefinition.Name + "-" + Model.PartFieldDefinition.Name).HtmlClassify();
+}
+<div class="TreeContainer">
+@if (paths.Any())
+{
+    <img class="TreeImg container-fluid" src="@Orchard.AssetUrl(paths[0])" alt="@mediaTexts.ElementAtOrDefault(0)" />
+}
+</div>
+
+
+<style Scoped>
+    .TreeImg {
+        width: 70rem;
+        height: 40rem;
+    }
+
+    .TreeContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+
+</style>

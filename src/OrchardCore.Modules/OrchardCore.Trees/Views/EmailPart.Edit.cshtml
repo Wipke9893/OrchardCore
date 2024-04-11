@@ -1,0 +1,9 @@
+@model EmailPartViewModel
+@using OrchardCore.Trees.ViewModels
+
+
+<fieldset class="form-group" asp-validation-class-for="Email">
+    <label asp-for="Email">@T["Email"]<span asp-validation-for="Email"></span></label>
+    <input asp-for="Email" class="form-control" />
+    <span class="hint">@T["Email"]</span>
+</fieldset>

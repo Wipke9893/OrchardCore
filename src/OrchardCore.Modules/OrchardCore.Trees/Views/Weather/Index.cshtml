@@ -1,0 +1,72 @@
+@model OrchardCore.Trees.Models.WeatherResponse
+
+@{
+    ViewData["Title"] = "Weather Information";
+    var selectedCity = ViewData["SelectedCity"]?.ToString();
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center">Select City</h2>
+
+            <form method="post">
+                <div class="form-group mb-2">
+                    <select name="city" id="city" class="form-control">
+                        <option value="Cincinnati" selected="@(selectedCity == "Cincinnati")">Cincinnati</option>
+                        <option value="New York" selected="@(selectedCity == "New York")">New York</option>
+                        <option value="Los Angeles" selected="@(selectedCity == "Los Angeles")">Los Angeles</option>
+                        <!-- Add more cities as needed -->
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Get Weather</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@if (Model != null)
+{
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            <div class="weather-details">
+                <h2 class="text-center">Weather in @Model.Name</h2>
+                <div class="text-center mb-4">
+                    <img src="@($"http://openweathermap.org/img/w/{Model.Weather[0].Icon}.png")" alt="Weather Icon" class="img-fluid">
+                </div>
+
+                <!-- Convert Unix timestamp to DateTime for Sunrise and Sunset -->
+                @{ 
+                    var sunriseTime = DateTimeOffset.FromUnixTimeSeconds(Model.Sys.Sunrise).ToLocalTime();
+                    var sunsetTime = DateTimeOffset.FromUnixTimeSeconds(Model.Sys.Sunset).ToLocalTime();
+                }
+
+                <!-- Display weather details -->
+                <div class="list-group">
+                    <div class="list-group-item">Temperature: @Model.Main.Temp &deg;F</div>
+                    <div class="list-group-item">Feels Like: @Model.Main.Feels_Like &deg;F</div>
+                    <div class="list-group-item">Condition: @Model.Weather[0].Main - @Model.Weather[0].Description</div>
+                    <div class="list-group-item">Wind Speed: @Model.Wind.Speed mph</div>
+                    <div class="list-group-item">Pressure: @Model.Main.Pressure hPa</div>
+                    <div class="list-group-item">Humidity: @Model.Main.Humidity %</div>
+                    <div class="list-group-item">Visibility: @(Model.Visibility / 1609) miles</div>
+                    @if (Model.Rain != null && Model.Rain.Last1h > 0)
+                    {
+                        <div class="list-group-item">Rain Last Hour: @Model.Rain.Last1h mm</div>
+                    }
+                    else
+                    {
+                        <div class="list-group-item">No Rain in Last Hour</div>
+                    }
+                    <div class="list-group-item">Sunrise: @sunriseTime.ToString("hh:mm tt")</div>
+                    <div class="list-group-item">Sunset: @sunsetTime.ToString("hh:mm tt")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h2 class="text-center mt-4">Please select a city to view the weather.</h2>
+}

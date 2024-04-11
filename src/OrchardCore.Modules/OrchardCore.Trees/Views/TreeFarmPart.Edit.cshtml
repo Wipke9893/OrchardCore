@@ -1,0 +1,9 @@
+@model TreeFarmPartViewModel
+@using OrchardCore.Trees.ViewModels
+
+<fieldset class="form-group" asp-validation-class-for="ScientificName">
+    <label asp-for="ScientificName">@T["ScientificName"]</label>
+    <select asp-for="ScientificName" class="form-select" asp-items="Model.ScientificNames"></select>
+    <span class="hint">@T["ScientificName"]</span>
+    <span asp-validation-for="ScientificName"></span>
+</fieldset>

@@ -5,6 +5,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{275E087F-A4E2-4A7B-A924-ED68E3A52086}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Cms.Web", "src\OrchardCore.Cms.Web\OrchardCore.Cms.Web.csproj", "{9D78FE2C-4179-47F6-B28A-034868280197}"
+	ProjectSection(ProjectDependencies) = postProject
+		{27432339-2FB2-4A67-809E-829D5883A980} = {27432339-2FB2-4A67-809E-829D5883A980}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B8D16C60-99B4-43D5-A3AD-4CD89AF39B25}"
 EndProject
@@ -518,6 +521,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Email.Azure", "src\OrchardCore.Modules\OrchardCore.Email.Azure\OrchardCore.Email.Azure.csproj", "{C35AB37B-5A09-4896-BEEE-B126B7E7018A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Email.Smtp", "src\OrchardCore.Modules\OrchardCore.Email.Smtp\OrchardCore.Email.Smtp.csproj", "{E8A1097D-A65A-4B17-A3A2-F50D79552732}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Custom", "Custom", "{135E27B1-86CA-4656-BB57-C19E8D084944}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Trees", "src\OrchardCore.Modules\OrchardCore.Trees\OrchardCore.Trees.csproj", "{27432339-2FB2-4A67-809E-829D5883A980}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Custom", "Custom", "{5FD7BA46-C35F-4C7B-8703-890F9BFC8568}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HallsCreekTreeFarm", "src\OrchardCore.Themes\HallsCreekTreeFarm\HallsCreekTreeFarm.csproj", "{A36703A9-7060-43E0-9D33-BCE37AB186EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1371,6 +1382,14 @@ Global
 		{E8A1097D-A65A-4B17-A3A2-F50D79552732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8A1097D-A65A-4B17-A3A2-F50D79552732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8A1097D-A65A-4B17-A3A2-F50D79552732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27432339-2FB2-4A67-809E-829D5883A980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27432339-2FB2-4A67-809E-829D5883A980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27432339-2FB2-4A67-809E-829D5883A980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27432339-2FB2-4A67-809E-829D5883A980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A36703A9-7060-43E0-9D33-BCE37AB186EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36703A9-7060-43E0-9D33-BCE37AB186EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36703A9-7060-43E0-9D33-BCE37AB186EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36703A9-7060-43E0-9D33-BCE37AB186EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1608,6 +1627,10 @@ Global
 		{47777735-7432-4CCA-A8C5-672E9EE65121} = {90030E85-0C4F-456F-B879-443E8A3F220D}
 		{C35AB37B-5A09-4896-BEEE-B126B7E7018A} = {A066395F-6F73-45DC-B5A6-B4E306110DCE}
 		{E8A1097D-A65A-4B17-A3A2-F50D79552732} = {A066395F-6F73-45DC-B5A6-B4E306110DCE}
+		{135E27B1-86CA-4656-BB57-C19E8D084944} = {275E087F-A4E2-4A7B-A924-ED68E3A52086}
+		{27432339-2FB2-4A67-809E-829D5883A980} = {135E27B1-86CA-4656-BB57-C19E8D084944}
+		{5FD7BA46-C35F-4C7B-8703-890F9BFC8568} = {AF3BADEA-CC93-4116-B3C1-F8D074EBEE4F}
+		{A36703A9-7060-43E0-9D33-BCE37AB186EB} = {5FD7BA46-C35F-4C7B-8703-890F9BFC8568}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46A1D25A-78D1-4476-9CBF-25B75E296341}

@@ -1,0 +1,22 @@
+@using OrchardCore.ContentManagement.Display
+@using OrchardCore.DisplayManagement.ModelBinding
+
+@inject IContentItemDisplayManager DisplayManager
+@inject IUpdateModelAccessor UpdateModelAccessor
+
+@model OrchardCore.Trees.ViewModels.MembersListPartViewModel
+
+@if (Model.ContentItems == null || !Model.ContentItems.Any())
+{
+    return;
+}
+
+<ul class="list-group">
+    @foreach (var member in Model.ContentItems)
+    {
+        var shape = await DisplayManager.BuildDisplayAsync(member, UpdateModelAccessor.ModelUpdater);
+        <li class="list-group-item">
+            @await DisplayAsync(shape)
+        </li>
+    }
+</ul>

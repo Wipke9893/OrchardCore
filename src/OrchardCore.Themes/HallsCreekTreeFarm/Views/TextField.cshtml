@@ -1,0 +1,18 @@
+@model OrchardCore.ContentFields.ViewModels.DisplayTextFieldViewModel
+@using OrchardCore.Mvc.Utilities
+
+@{
+    var name = (Model.PartFieldDefinition.PartDefinition.Name + "-" + Model.PartFieldDefinition.Name).HtmlClassify();
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.Text)) {
+<div class="row field field-type-textfield field-name-@name">
+    <div class="col-sm-6 col-md-4 fw-bold text-end">
+        @Model.PartFieldDefinition.DisplayName()
+    </div>
+
+    <div class="col-sm-6 col-md-8">
+        @Model.Text
+    </div>
+</div>
+}

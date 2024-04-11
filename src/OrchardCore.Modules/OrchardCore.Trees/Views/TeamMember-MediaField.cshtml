@@ -1,0 +1,17 @@
+@model OrchardCore.Media.ViewModels.DisplayMediaFieldViewModel
+@using OrchardCore.ContentManagement.Metadata.Models
+@using OrchardCore.Mvc.Utilities
+@{
+    var paths = Model.Paths ?? Array.Empty<string>();
+    var mediaTexts = Model.Field?.MediaTexts ?? Array.Empty<string>();
+    var name = (Model.PartFieldDefinition.PartDefinition.Name + "-" + Model.PartFieldDefinition.Name).HtmlClassify();
+}
+@if (paths.Length > 0)
+{
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4 container-fluid">
+            <img src="@Orchard.AssetUrl(paths[0])" class="img-thumbnail" alt="@mediaTexts.ElementAtOrDefault(0)" />
+        </div>
+    </div>
+}
+

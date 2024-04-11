@@ -1,0 +1,128 @@
+@using OrchardCore.Admin.Models
+@using OrchardCore.DisplayManagement
+@using OrchardCore.DisplayManagement.ModelBinding
+@using OrchardCore.Entities
+@using OrchardCore.Themes.Services
+@using OrchardCore.Users.Models
+
+@inject IDisplayManager<Navbar> DisplayManager
+@inject IUpdateModelAccessor UpdateModelAccessor
+@inject ThemeTogglerService ThemeTogglerService
+@{
+    var adminSettings = Site.As<AdminSettings>();
+    // Navbar is pre-rendered to allow resource injection.
+    var navbar = await DisplayAsync(await DisplayManager.BuildDisplayAsync(UpdateModelAccessor.ModelUpdater));
+}
+
+<!DOCTYPE html>
+
+<html lang="@Orchard.CultureName()"
+      dir="@Orchard.CultureDir()"
+      data-bs-theme="
+@await ThemeTogglerService.CurrentTheme()"
+      data-tenant="@ThemeTogglerService.CurrentTenant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@RenderTitleSegments(Site.SiteName, "before")</title>
+    <link type="image/x-icon" rel="shortcut icon" href="~/HallsCreekTreeFarm/images/favicon.ico">
+
+    <!-- This script can't wait till the footer -->
+    <script asp-name="admin-head" version="1" at="Head"></script>
+    <style asp-src="~/HallsCreekTreeFarm/styles/theme.css"></style>
+
+    @if (Orchard.IsRightToLeft())
+    {
+        <style asp-name="bootstrap-rtl" version="5" at="Head"></style>
+        <style asp-name="HallsCreekTreeFarm" depends-on="bootstrap-rtl" asp-src="~/HallsCreekTreeFarm/styles/theme.css" debug-src="~/HallsCreekTreeFarm/styles/theme.css" at="Foot"></style>
+    }
+    else
+    {
+        <style asp-name="bootstrap" version="5" at="Head"></style>
+        <style asp-name="HallsCreekTreeFarm" depends-on="bootstrap" asp-src="~/HallsCreekTreeFarm/styles/theme.css" debug-src="~/HallsCreekTreeFarm/styles/theme.css" at="Foot"></style>
+    }
+
+    <script asp-name="bootstrap" version="5" at="Foot"></script>
+
+    <style asp-name="font-awesome" version="6"></style>
+    <resources type="Header" />
+    @await RenderSectionAsync("HeadMeta", required: false)
+</head>
+<body>
+    <div class="HeaderSection">
+        <h1 class="BannerText">Welcome to HallsCreek TreeFarm</h1>
+        <img class="logo" src="~/HallsCreekTreeFarm/images/logo.png" alt="HallsCreek TreeFarm Logo" width="200">
+    </div>
+
+    @await DisplayAsync(Model.Header)
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/HallsCreekTreeFarm/">HallsCreek</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/HallsCreekTreeFarm/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HallsCreekTreeFarm/HallsCreekCatalogRetail">Retail Catalog</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)" id="wholesaleLink">WholeSale Catalog</a>
+                        <div id="promoCodeContainer" style="display:none;">
+                            <input type="text" id="promoCodeInput" placeholder="Enter Promo Code" />
+                            <button onclick="submitPromoCode()">Submit</button>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link" href="/HallsCreekTreeFarm/MeetOurTeam">MeetOurTeam</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HallsCreekTreeFarm/AboutOurFarm">About Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HallsCreekTreeFarm/weather">Weather</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="MainBody container-fluid">
+        @await RenderSectionAsync("Messages", required: false)
+@*         @if (User != null)
+        {
+            @T["Welcome to HallsCreek TreeFarm", User.Identity.Name]
+        }
+
+        @{
+            var TreeFarmCount = 5;
+        }
+        @T.Plural(TreeFarmCount, "There is {0} Tree.", "There are {0} Types of Trees.") *@
+
+        @await RenderBodyAsync()
+    </main>
+
+
+    @if (Model.Footer is not null)
+    {
+        <footer class="FooterArea">
+            @await RenderSectionAsync("Footer", required: false)
+            <div>
+                © 2024 HallsCreek TreeFarm: <a href="#">Email-Us!</a>
+            </div>
+        </footer>
+    }
+
+    @RenderSection("Scripts", required: false)
+    <resources type="Footer" />
+    <script asp-src="~/HallsCreekTreeFarm/scripts/promoCode.js"></script>
+</body>
+</html>
