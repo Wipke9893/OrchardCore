@@ -1,0 +1,30 @@
+@model OrchardCore.Trees.ViewModels.WeatherWidgetPartViewModel
+
+<div class="weather-widget">
+    <select onchange="updateCity(this.value);">
+        @foreach (var city in Model.AvailableCities)
+        {
+            var selected = city == Model.City ? "selected" : string.Empty;
+            <option value="@city" selected="@selected">@city</option>
+        }
+    </select>
+
+    @if (Model.WeatherResponse != null)
+    {
+        <div>
+            <h2>Weather in @Model.City</h2>
+            <p><strong>Temperature:</strong> @Model.WeatherResponse.Main.Temp &deg;C</p>
+            <p><strong>Condition:</strong> @Model.WeatherResponse.Weather[0].Main - @Model.WeatherResponse.Weather[0].Description</p>
+        </div>
+    }
+    else
+    {
+        <p>Please select a city to view the weather.</p>
+    }
+</div>
+
+@* <script>
+function updateCity(city) {
+    window.location.href = '?city=' + city; // refresh the page with the new city
+}
+</script> *@
